@@ -35,10 +35,11 @@ function getResult(arr) {
   let action = arr[arr.length - 1].action.trim();
   
   for(let i = 0; i <= arr.length - 2; i++) {
-    let chache = arr[i].split(' + ');    
     if(action === '+') {
+      let chache = arr[i].split(' + ');    
       result.push(parseInt(chache[0]) + parseInt(chache[1]));
     } else {
+      let chache = arr[i].split(' - ');
       result.push(parseInt(chache[0]) - parseInt(chache[1]));
     }   
   }
@@ -51,5 +52,6 @@ makeExamples(actions.plus, plusExamples);
 let plusResult = getResult(plusExamples);
 // console.log(plusResult);
 makeExamples(actions.minus, minusExamples);
+let minusResult = getResult(minusExamples);
 // console.log(minusExamples);
 

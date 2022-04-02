@@ -3,14 +3,35 @@
 let plusDiv = document.querySelector('#plus');
 let minusDiv = document.querySelector('#minus');
 
-for(let i = 0; i <= plusExamples.length - 2; i++) {   
-  let liEl = document.createElement('li');
-  liEl.innerText += plusExamples[i];
-  plusDiv.appendChild(liEl);
+function makeList(examples, div, result) {
+  for(let i = 0; i <= examples.length - 2; i++) {   
+    let liEl = document.createElement('li');
+    let spanEl = document.createElement('span');
+    spanEl.innerText += result[i];
+    spanEl.hidden = true;
+    liEl.innerText += examples[i] + ' = ';
+    liEl.appendChild(spanEl);      
+    div.appendChild(liEl);
+  }
 }
 
-for(let i = 0; i <= minusExamples.length - 2; i++) {   
-  let liEl = document.createElement('li');
-  liEl.innerText += minusExamples[i];
-  minusDiv.appendChild(liEl);
-}
+let showBtn = document.querySelector('#show_results');  
+showBtn.addEventListener("click", () => {  
+  let spanEls = document.querySelectorAll("span[hidden]");
+  if(spanEls.length !== 0) {
+    spanEls.forEach((el) => {
+      el.hidden = false;
+    })
+  } else {
+    let spanEls = document.querySelectorAll("span");
+    spanEls.forEach((el) => {
+      el.hidden = true;
+    })
+  }
+  
+});
+
+
+makeList(plusExamples, plusDiv, plusResult);
+makeList(minusExamples, minusDiv, minusResult);
+
